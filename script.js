@@ -131,7 +131,6 @@ let pScore;
 let vHeroScore;
 let vPrincessScore;
 let hGuess;
-let pAdv;
 let hDecSum;
 let pDecSum;
 let vDecSum;
@@ -184,7 +183,7 @@ function getHChoice() {
                 hChoice = prompt(hPrompt);
             }
         } else if (!pAlive) {
-            alert ("You will now face the Villain without the help of the Princess");
+            alert ("Hero, you will now face the Villain without the help of the Princess");
             hChoice = 0;
         }
     }
@@ -202,8 +201,8 @@ function getPChoice() {
                 pChoiceNote = "*"
             }
         } else if (!hAlive) {
-            alert ("You will now face the Villain without the protection of the Hero");
-            pChoice = 1;
+            alert ("Princess, you will now face the Villain without the protection of the Hero");
+            pChoice = 2; //Hero dies, princess keeps advantage
             pChoiceNote = ""
         }
     } 
@@ -217,10 +216,10 @@ function getVChoice() {
             vChoice = prompt(vPrompt);
         }
     } else if (!hAlive) {
-        alert ("You are now focusing your attack on the Princess, with the two extra points gained from defeating the Hero")
+        alert ("Villain, you are now focusing your attack on the Princess, with the two extra points gained from defeating the Hero")
         vChoice = 2;
     } else if (!pAlive) {
-        alert ("You are now focusing your attack on the Hero, with one extra point from defeating the Princess")
+        alert ("Villain, you are now focusing your attack on the Hero, with one extra point from defeating the Princess")
         vChoice = 1;
     }
 }
@@ -231,16 +230,17 @@ function diceRollInt() {
 function getHScore (){
     hScore = hRoll;
     //Princess choice
-    if (pChoice == "1" && vChoice != "2") {
+    if (pChoice == "1") {
         let extraHeroPoints = 0;
         if (pRoll == 3 || pRoll == 4) {
             extraHeroPoints = 1;
-            hScore = hScore + extraHeroPoints;
         } else if (pRoll == 5 || pRoll == 6) {
             extraHeroPoints = 2;
+        }
+        pDecSum = `Gave up advantage, added ${extraHeroPoints} possible points to Hero's score`
+        if (vChoice != "2") {
             hScore = hScore + extraHeroPoints;
         }
-        pDecSum = `Gave up advantage, added ${extraHeroPoints} points to Hero's score`
     } else {
         pDecSum = "Kept advantage";
     }
@@ -260,11 +260,6 @@ function getHScore (){
 }
 function getPScore() {
     pScore = pRoll + 1;
-    if (pChoice == 1) {
-        pAdv = false;
-    } else {
-        pAdv = true;
-    }
     if (hChoice != 0 || vChoice == 1) {
         pScore = pScore - 1;
     }
@@ -281,10 +276,10 @@ function getVScore() {
     }
     // If only one is alive
     if (!hAlive) {
-        vPrincessScore = vRoll + 2;
+        vPrincessScore = vRoll + 2;// if hero dies, villain gets those extra two points every round
     }
     if (!pAlive) {
-        vHeroScore = vRoll + 2;
+        vHeroScore = vRoll + 1;//if princess dies, villain steals her extra point
     }
     //Calculate villain advantage, reroll draws
     if (hAlive) {
