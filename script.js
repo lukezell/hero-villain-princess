@@ -263,8 +263,8 @@ function getPScore() {
     }
 }
 function getVScore() {
-    vHeroScore = vRoll + 1;
-    vPrincessScore = vRoll + 1;
+    vHeroScore = vRoll;
+    vPrincessScore = vRoll;
     if (vChoice == 1) {
         vHeroScore = vHeroScore + 1;
         vDecSum = "Focused attack on Hero";

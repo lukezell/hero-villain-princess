@@ -5,6 +5,7 @@ body {
     background-color: var(--background-color);
     color: var(--accent-color);
     font-size: .9em;
+    padding: 0px 20px;
 }
 
 h1 {
@@ -29,7 +30,6 @@ td, th {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 20px;
 }
 
 .directions {
