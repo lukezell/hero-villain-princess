@@ -1,7 +1,7 @@
 body {
     font-family: "IBM Plex Mono", monospace;
     --background-color: #000;
-    --accent-color: #00ff77;
+    --accent-color: /*#00ff77*/ pink;
     background-color: var(--background-color);
     color: var(--accent-color);
     font-size: .9em;

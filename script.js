@@ -84,16 +84,18 @@ gameButton.addEventListener("click", function (){
     else if (gameStep == 3) {
         getResults();
         if (hAlive) {
+            if (!pAlive) {
+                hDecSum = "You have no advantage";
+            }
             hDecDis.textContent = hDecSum;
             hPointsDis.textContent = `${hScore} [${hResult}]`;
             vPointsHDis.textContent = `${vHeroScore} [${vHeroResult}]`;
         }
         if (pAlive) {
-            pDecDis.textContent = pDecSum;
-            let pChoiceNote = ""
-            if (pChoice == 2) {
-                pChoiceNote = "*"
+            if (!hAlive) {
+                pDecSum = "You have no advantage";
             }
+            pDecDis.textContent = pDecSum;
             pPointsDis.textContent = `${pScore}${pChoiceNote} [${pResult}]`;
             vPointsPDis.textContent = `${vPrincessScore} [${vPrincessResult}]`;
         }
@@ -119,6 +121,7 @@ let pAlive = true;
 let vAlive = true;
 let hChoice;
 let pChoice;
+let pChoiceNote = "";
 let vChoice;
 let hRoll;
 let pRoll;
@@ -195,15 +198,19 @@ function getPChoice() {
                 alert("Invalid input, please choose 1 for yes and 2 for no");
                 pChoice = prompt(pPrompt);
             }
+            if (pChoice == 2) {
+                pChoiceNote = "*"
+            }
         } else if (!hAlive) {
             alert ("You will now face the Villain without the protection of the Hero");
             pChoice = 1;
+            pChoiceNote = ""
         }
     } 
 }
 function getVChoice() {
     if (hAlive && pAlive) {
-        let vPrompt = "Villain, who do you want focus your attack on (add one point), the Hero: 1, or Princess: 2?";
+        let vPrompt = "Villain, who do you want focus your attack on, the Hero: 1, or Princess: 2? (+1 and block from giving other player advantage: Hero letting Princess have extra point, Princess adding points to Hero's roll)";
         vChoice = prompt(vPrompt);
         while (vChoice !== "1" && vChoice !== "2") {
             alert("Invalid input, please choose 1 for Hero and 2 for Princess");
@@ -224,7 +231,7 @@ function diceRollInt() {
 function getHScore (){
     hScore = hRoll;
     //Princess choice
-    if (pChoice == "1") {
+    if (pChoice == "1" && vChoice != "2") {
         let extraHeroPoints = 0;
         if (pRoll == 3 || pRoll == 4) {
             extraHeroPoints = 1;
@@ -247,7 +254,7 @@ function getHScore (){
             hDecSum = `Subtracted extra point from Princess, guessed wrong (${hChoice})`;
         }
     } else  {
-        hDecSum = `Did not subtract point from Princess`
+        hDecSum = `Tried to allow Princess to keep extra point`
         hGuess = false;
     }
 }
@@ -258,7 +265,7 @@ function getPScore() {
     } else {
         pAdv = true;
     }
-    if (hChoice != 0) {
+    if (hChoice != 0 || vChoice == 1) {
         pScore = pScore - 1;
     }
 }
@@ -266,11 +273,18 @@ function getVScore() {
     vHeroScore = vRoll;
     vPrincessScore = vRoll;
     if (vChoice == 1) {
-        vHeroScore = vHeroScore + 1;
-        vDecSum = "Focused attack on Hero";
+        vHeroScore = vRoll + 1;
+        vDecSum = "Focused attack on Hero"//: +1, stops Hero from letting Princess keep extra point";
     } else {
-        vPrincessScore = vPrincessScore + 1;
-        vDecSum = "Focused attack on Princess";
+        vPrincessScore = vRoll + 1;
+        vDecSum = "Focused attack on Princess"//: +1, stops Princess from contributing to Hero's score";
+    }
+    // If only one is alive
+    if (!hAlive) {
+        vPrincessScore = vRoll + 2;
+    }
+    if (!pAlive) {
+        vHeroScore = vRoll + 2;
     }
     //Calculate villain advantage, reroll draws
     if (hAlive) {
@@ -330,7 +344,7 @@ function calculateFinal() {
             hHP--;
             if (hHP <= 0) {
                 hAlive = false;
-                hChoice = 0;
+                hChoice = 1;
                 hRollDis.textContent = "";
                 hDecDis.textContent = "";
                 hPointsDis.textContent = "";
