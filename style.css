@@ -20,7 +20,8 @@ table {
 
 td, th {
     border: 1px solid var(--accent-color);
-    padding: 7px
+    padding: 7px;
+    min-width: 20px;
 }
 
 .table-container {
