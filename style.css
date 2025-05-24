@@ -1,41 +1,52 @@
 body {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: Courier/*"IBM Plex Mono", monospace*/;
     --background-color: #000;
-    --accent-color: /*#00ff77*/ pink;
+    --accent-color: rgb(0, 255, 0);
     background-color: var(--background-color);
     color: var(--accent-color);
-    font-size: .9em;
+    font-size: .9rem;
     padding: 0px 20px;
 }
 
 h1 {
     text-align: center;
     font-weight: normal;
+    max-width: 600px;
+    font-size: .9rem;
+    margin: 20px auto;
 }
 
 table {
     border-collapse: collapse;
-    display: inline-block;
+    display: block;
     margin: 10px;
+    text-align: left;
 }
 
 td, th {
-    border: 1px solid var(--accent-color);
+    border: 1px solid transparent; /*var(--accent-color);*/
     padding: 7px;
-    min-width: 20px;
+    /*min-width: 87px;*/
+    vertical-align: top;
+    font-weight: normal;
 }
 
 .table-container {
     margin: auto;
+    max-width: 600px;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
+}
+
+table:has(#h-hp), table:has(#h-wins) {
+    display: inline-block;
 }
 
 .directions {
-    margin-top: 50px;
-    max-width: 900px;
-    margin: 50px auto;
+    margin-top: 30px;
+    max-width: 600px;
+    margin: auto;
 }
 
 @property --bGradientHex1 {
@@ -51,9 +62,16 @@ td, th {
 }
 
 #button-container {
-    display: flex;
+    max-width: 600px;
+    /*display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 20px;*/
+    text-align: center;
+    div {
+        cursor: pointer;
+        margin: 15px;
+    }
+    margin: auto;
 }
 
 button {
@@ -90,3 +108,8 @@ button:hover {
     --bGradientHex2: var(--accent-color);
     color: var(--background-color);
 }*/
+
+#button-container div a {
+    color: var(--accent-color);
+    text-decoration: none;
+}

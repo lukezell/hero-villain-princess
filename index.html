@@ -12,44 +12,47 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Hero, Villain, Princess</h1>
+    <h1>{ HERO_VILLAIN_PRINCESS }</h1>
+
+
 
     <div class="table-container">
         <table>
             <tr>
-                <th colspan="2">Roll</th>
+                <th colspan="2">ROLL</th>
             </tr>
             <tr>
-                <th>Hero</td>
+                <th>hero_</td>
                 <td id="h-roll"></td>
             </tr>
             <tr>
-                <th>Princess</td>
+                <th>princess_</td>
                 <td id="p-roll"></td>
             </tr>
             <tr>
-                <th>Villain</td>
+                <th>villain_</td>
                 <td id="v-roll"></td>
             </tr>
         </table>
-
+    </div>
+    <div class="table-container">
         <table>
             <tr>
-                <th colspan="2">Decision</th>
-                <th colspan="2">Final Points</th>
+                <th colspan="2">DECISION</th>
+                <th colspan="2">FINAL_POINTS</th>
             </tr>
             <tr>
-                <th>Hero</td>
+                <th>hero_</td>
                 <td id="h-dec"></td>
                 <td colspan="2" id="h-points"></td>
             </tr>
             <tr>
-                <th>Princess</td>
+                <th>princess_</td>
                 <td id="p-dec"></td>
                 <td colspan="2" id="p-points"></td>
             </tr>
             <tr>
-                <th>Villain</td>
+                <th>villain_</td>
                 <td id="v-dec"></td>
                 <td id="v-points-h"></td><td id="v-points-p"></td> 
             </tr>
@@ -59,75 +62,79 @@
     <div class="table-container">
         <table>
             <tr>
-                <th colspan="2">Remaining HP</th>
+                <th colspan="2">REMAINING_HP</th>
             </tr>
             <tr>
-                <th>Hero</td>
+                <th>hero_</td>
                 <td id="h-hp">5</td>
             </tr>
             <tr>
-                <th>Princess</td>
+                <th>princess_</td>
                 <td id="p-hp">5</td>
             </tr>
             <tr>
-                <th>Villain</td>
+                <th>villain_</td>
                 <td id="v-hp">5</td>
             </tr>
         </table>
 
         <table>
             <tr>
-                <th colspan="2">Total Wins</th>
+                <th colspan="2">TOTAL_WINS</th>
             </tr>
             <tr>
-                <th>Hero</td>
+                <th>hero_</td>
                 <td id="h-wins">0</td>
             </tr>
             <tr>
-                <th>Princess</td>
+                <th>princess_</td>
                 <td id="p-wins">0</td>
             </tr>
             <tr>
-                <th>Villain</td>
+                <th>villain_</td>
                 <td id="v-wins">0</td>
             </tr>
         </table>
     </div>
 
     <div id="button-container">
-        <button id="game-button">Start Game</button>
+        <!--<button id="game-button">Start Game</button>-->
+        <div id="game-button">
+            ---------------<br>
+            | startGame() |<br>
+            ---------------
+        </div>
     </div>
 
     <div class="directions">
-        <p>This is a classic tale with three characters: Hero, Villain, and Princess.</p>
+        <p>/* this is a classic tale with three characters: HERO, VILLAIN, and PRINCESS.</p>
 
-        <p>The Villain is pitted against both the Hero and the Princess, starting off with one extra pooint. This Villian 
-        can choose to add another point to their score against one of these two. If the 
-        Villain defeats the Hero, two points are added to their score against the 
-        Princess, so this is most often the best choice. If the Villain kills the 
-        Hero, they will have two extra points against the princess every round 
-        following. If the Villain kills the princess, they will have one extra point 
-        against the Hero every round after</p>
+        <p>the VILLAIN is pitted against both the HERO and the PRINCESS. the VILLAIN 
+        can choose to focus the attack each round on one of these two. One point (+1) 
+        will be added to the VILLAIN's score against this player. if the VILLAIN defeats 
+        the HERO, there is an added bonus. two points (+2) are added to the VILLAIN's score 
+        against the PRINCESS. if the VILLAIN kills the HERO, there will be two extra 
+        points (+2) added against the PRINCESS every round after. if the VILLAIN kills the 
+        PRINCESS, her extra point is stolen and there will be one extra point (+1) added 
+        against the HERO every round after.</p>
 
-        <p>The Princess gets an extra point (although this can be taken by the hero) and 
-        defeats the Villain in a tie, but can choose to give up this advantage in order 
-        to have their roll add potential points to the hero's roll (1-2: +0 points, 3-4: 
-        +1 point, 5-6: +2 points) so that the Villain has a lower chance of beating the 
-        Hero and gaining an advantage (+2 pts) against the Princess.</p>
+        <p>the PRINCESS gets an extra point, although this can be blocked by the HERO, and 
+        defeats the VILLAIN in a tie (*), but can choose to give up this advantage in order 
+        to for this roll add potential points to the HERO's roll (1-2: +0 points, 3-4: 
+        +1 point, 5-6: +2 points) so that the VILLAIN has a lower chance of beating the 
+        HERO and gaining an advantage (+2 pts) against the PRINCESS.</p>
 
-        <p>The Hero can take a point from the Princess for the chance to guess the 
-        Villain's roll to automatically win that round. However, the more this 
-        is done, the less the Princess will be willing and able to give up her 
-        advantage to increase this Hero's roll.</p>
+        <p>the HERO can block the PRINCESS's extra point for the chance to guess the 
+        VILLAIN's roll and automatically win that round. the guess is successful if it is 
+        exact or it is one below the villain's roll.</p>
 
-        <p>Characters have 5 Health Points each round. The Hero and Princess lose one HP 
-        each time they are defeated by the Villain. The Villain attacks the Hero 
-        and Princess each round and loses .5 HP when defeated by either of 
-        them. The Villain wins by killing both the Hero and the Princess. The Princess 
-        and the Hero can both win by killing the Villain and surviving the game, or 
-        one of them can win by killing the Villain after the other has died 
-        (although this is more difficult, as you will be playing without the 
-        advantage the other gives).</p>
+        <p>characters have 5 Health Points each round. the HERO and PRINCESS lose one HP 
+        each time they are defeated by the VILLAIN. the VILLAIN attacks the HERO 
+        and PRINCESS each round and loses .5 HP when defeated by either of 
+        them. the VILLAIN wins by killing both the HERO and the PRINCESS. the PRINCESS 
+        and the HERO can both win by killing the VILLAIN and surviving the game, or 
+        one of them can win by killing the VILLAIN after the other has died, although 
+        this is more difficult, as you will be playing without the advantage the other gives. */</p>
     </div>
 </body>
 </html>
